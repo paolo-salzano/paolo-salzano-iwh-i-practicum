@@ -39,7 +39,7 @@ app.get("/", async (req, res) => {
 
 // * Code for Route 2 goes here
 
-app.post("/update-cobj", async (req, res) => {
+app.get("/update-cobj", async (req, res) => {
   res.render("updates", {
     title: "Update Custom Object Form | HubSpot Practicum",
   });
@@ -49,8 +49,9 @@ app.post("/update-cobj", async (req, res) => {
 // * Code for Route 3 goes here
 
 app.post("/update-cobj", async (req, res) => {
-  const { Name, Dimension, Color } = req.body;
-  const customObjectUrl = "https://api.hubapi.com/crm/v3/objects/2-43438964";
+  const { pet_name, pet_dimensions, pet_color } = req.body;
+  const customObjectUrl =
+    "https://api.hubapi.com/crm/v3/objects/2-43438964?properties=pet_name,pet_dimensions,pet_color";
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
     "Content-Type": "application/json",
@@ -58,9 +59,9 @@ app.post("/update-cobj", async (req, res) => {
 
   const payload = {
     properties: {
-      Name,
-      Dimension,
-      Color,
+      pet_name,
+      pet_dimensions,
+      pet_color,
     },
   };
 
